@@ -1,0 +1,2 @@
+import{Ag as e,Og as t,a_ as n,e_ as r}from"./main-yuUnZM7j.js";var i=e(`<div>`);function a(e){let[a,o]=n(e,[`class`,`classList`]);return(()=>{var e=i();return t(e,r(o,{role:`separator`,"aria-orientation":`horizontal`,"data-component":`divider-v2`,get classList(){return{...a.classList,[a.class??``]:!!a.class}}}),!1,!1),e})()}export{a as t};
+//# sourceMappingURL=divider-j7-mZ2JY.js.map

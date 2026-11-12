@@ -1,0 +1,11 @@
+.env
+.env.*
+*.pem
+*.key
+
+# GitHub 100MB hard limit — ship these via Releases instead
+/usr/lib/whocode/app/desktop-pkg/resources/opencode-cli
+/usr/lib/whocode/runtime/electron
+
+# installable deps
+**/node_modules/

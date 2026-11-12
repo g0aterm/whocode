@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=whocode
+Comment=whocode desktop
+Exec=whocode %U
+Icon=whocode
+Terminal=false
+Categories=Development;
+StartupWMClass=whocode-desktop
+X-AppImage-Version=2099.12.31.1

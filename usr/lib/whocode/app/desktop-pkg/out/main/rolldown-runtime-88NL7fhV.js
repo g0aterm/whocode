@@ -1,0 +1,1 @@
+import{createRequire as e}from"node:module";var t=Object.defineProperty,n=(e,n)=>{let r={};for(var i in e)t(r,i,{get:e[i],enumerable:!0});return n||t(r,Symbol.toStringTag,{value:`Module`}),r},r=e(import.meta.url);export{r as n,n as t};

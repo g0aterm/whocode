@@ -1,0 +1,39 @@
+#!/bin/sh
+# whocode Linux launcher.
+#
+# The SUID sandbox helper in a user-owned tree is not setuid, so the runtime
+# starts with --no-sandbox. Set WHOCODE_SANDBOX=1 after
+#   sudo chown root:root runtime/chrome-sandbox && sudo chmod 4755 runtime/chrome-sandbox
+# to use the sandbox instead.
+#
+# WHOCODE_X11=1 forces X11 (useful on Wayland/NVIDIA), and
+# WHOCODE_DISABLE_GPU=1 forces software rendering.
+set -eu
+
+self=$0
+case $self in
+  */*) ;;
+  *) self=./$self ;;
+esac
+here=$(CDPATH= cd -- "$(dirname -- "$self")" && pwd)
+
+runtime="$here/runtime/electron"
+sidecar="$here/app/desktop-pkg/resources/opencode-cli"
+
+[ -x "$runtime" ] || chmod +x "$runtime" 2>/dev/null || true
+for f in "$runtime" "$sidecar" "$here/runtime/chrome_crashpad_handler" "$here/runtime/chrome-sandbox"; do
+  [ -x "$f" ] || chmod +x "$f" 2>/dev/null || true
+done
+
+flags="--no-sandbox --class=whocode"
+if [ "${WHOCODE_SANDBOX:-0}" = "1" ]; then
+  flags=""
+fi
+if [ "${WHOCODE_X11:-0}" = "1" ]; then
+  flags="$flags --ozone-platform=x11"
+fi
+if [ "${WHOCODE_DISABLE_GPU:-0}" = "1" ]; then
+  flags="$flags --disable-gpu"
+fi
+
+exec "$runtime" $flags "$here/app/desktop-pkg" "$@"
